@@ -1,0 +1,93 @@
+<!-- logout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4; /* Light gray background */
+            color: #333; /* Dark text color */
+            text-align: center; /* Center text */
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full height */
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Column layout */
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+        }
+
+        h1 {
+            font-size: 2.5em; /* Large heading */
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        p {
+            font-size: 1.2em; /* Larger paragraph text */
+            margin: 0; /* No margin */
+        }
+
+        .spinner {
+            border: 5px solid #ddd; /* Light gray border */
+            border-top: 5px solid #3498db; /* Blue top border */
+            border-radius: 50%; /* Circular shape */
+            width: 50px; /* Width of spinner */
+            height: 50px; /* Height of spinner */
+            animation: spin 1s linear infinite; /* Spin animation */
+            margin-top: 20px; /* Space above spinner */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+        // Firebase configuration
+          const firebaseConfig = {
+        apiKey: "AIzaSyD-6zZlaLEx0YtTOQ8rFyebPf8DCw8mkq0",
+        authDomain: "appcreator24-25638.firebaseapp.com",
+        projectId: "appcreator24-25638",
+        storageBucket: "appcreator24-25638.appspot.com",
+        messagingSenderId: "230297127510",
+        appId: "1:230297127510:web:1d27039a1bdabfc58e49f7",
+        measurementId: "G-6CMD6L8K7S"
+    };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Logout function
+        function logout() {
+            // Sign out user
+            auth.signOut().then(() => {
+                // Clear user data from local storage
+                localStorage.removeItem('user');
+                // Redirect to login page
+                window.location.href = "index.html";
+            }).catch((error) => {
+                // Handle errors here
+                console.error("Error signing out: ", error);
+            });
+        }
+
+        // Call logout when the page loads
+        window.onload = logout;  // Automatically log out the user when the page loads
+    </script>
+</head>
+<body>
+    <div>
+        <h1>You have been logged out.</h1>
+        <p>Redirecting to the login page...</p>
+        <div class="spinner"></div> <!-- Loading spinner -->
+    </div>
+</body>
+</html>

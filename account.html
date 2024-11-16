@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Global styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+
+    
+    /* Main Content */
+    .main-content {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .profile-container {
+  display: flex;
+  justify-content: center; /* Horizontally centers the content */
+  align-items: center;    /* Vertically centers the content */
+  height: 100%;           /* Adjust based on your layout */
+}
+
+/* Profile image styling */
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #ff5722;
+  object-fit: cover;
+}
+
+    /* Cards */
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      width: calc(50% - 30px);
+      margin: 15px;
+      color: #333;
+      font-size: 16px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .balance-card {
+      background: #ff7043;
+      border-radius: 10px;
+      width: calc(100% - 30px);
+      padding: 20px;
+      color: #333;
+      font-weight: bold;
+      margin: 15px;
+      font-size: 18px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .small-card {
+      height: auto;
+      padding: 10px;
+      margin: 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .list-card {
+      background-color: #ff7043;
+      font-weight: bold;
+      width: calc(100% - 30px);
+      height: auto;
+      padding: 10px;
+      margin: 10px;
+      text-align: left;
+    }
+
+    .list-card ul {
+      padding-left: 20px;
+      font-size: 14px;
+    }
+
+    .list-card pre {
+      border: none;
+      font-size: 12px;
+      background-color: grey;
+      color: white;
+      padding: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .card, .balance-card, .list-card {
+        width: calc(100% - 30px);
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+    <body class="bg-gray-100">
+        <header class="bg-orange-500 text-white">
+          <div class="container mx-auto flex justify-between items-center py-4 px-6">
+           <div class="text-2xl font-bold">
+            LiveWell
+           </div>
+           <div class="hidden md:flex items-center space-x-4">
+            <input class="px-4 py-2 rounded-md w-96" placeholder="Search for products" type="text"/>
+            <button class="bg-white text-orange-500 px-4 py-2 rounded-md">
+             <i class="fas fa-search">
+             </i>
+            </button>
+           </div>
+           <div class="flex items-center space-x-6">
+            <a class="hover:underline" href="profile.html">
+            Profile
+            </a>
+            <a class="hover:underline" href="account.html">
+              Dashboard
+             </a>
+            <a class="hover:underline" href="logout.html">
+              Log out
+             </a>
+            <a class="hover:underline" href="orders.html">
+             Orders
+            </a>
+            <a class="hover:underline" href="cart.html">
+             Cart
+            </a>
+           </div>
+          </div>
+          <div class="md:hidden flex items-center justify-center py-2">
+           <input class="px-4 py-2 rounded-md w-3/4" placeholder="Search for products" type="text"/>
+           <button class="bg-white text-orange-500 px-4 py-2 rounded-md ml-2">
+            <i class="fas fa-search">
+            </i>
+           </button>
+          </div>
+         </header>
+         <!-- Navigation -->
+         <nav class="bg-orange-600 text-white">
+          <div class="container mx-auto flex flex-wrap justify-between items-center py-2 px-6">
+           <a class="hover:underline flex items-center space-x-2 mb-2 md:mb-0" href="dashboard.html">
+            <i class="fas fa-home">
+            </i>
+            <span>
+             Home
+            </span>
+           </a>
+           <a class="hover:underline flex items-center space-x-2 mb-2 md:mb-0" href="categories.html">
+            <i class="fas fa-th-large">
+            </i>
+            <span>
+             Shop by Category
+            </span>
+           </a>
+           <a class="hover:underline flex items-center space-x-2 mb-2 md:mb-0" href="dashboard.html">
+            <i class="fas fa-tags">
+            </i>
+            <span>
+             Today's Deals
+            </span>
+           </a>
+           <a class="hover:underline flex items-center space-x-2 mb-2 md:mb-0" href="support.html">
+            <i class="fas fa-headset">
+            </i>
+            <span>
+             Customer Service
+            </span>
+           </a>
+           
+           </a>
+           <a class="hover:underline flex items-center space-x-2 mb-2 md:mb-0" href="sell.html">
+            <i class="fas fa-dollar-sign">
+            </i>
+            <span>
+             Sell
+            </span>
+           </a>
+          </div>
+         </nav>
+      
+
+<!-- Main Content -->
+ <div class="profile-container">
+<div class="main-content">
+    <!-- Circular Profile Image -->
+    <img src="https://i.postimg.cc/DfPYyr12/LIVEWELL-Marketing-Corp-LOGO-only-removebg-preview.png" class="profile-image">
+    <h1 style="font-weight: bold;" id="company-name"> </h1>
+</div>
+</div>
+
+<script>
+    // Retrieve the saved username from localStorage
+    const savedName = localStorage.getItem('username');
+
+    // Update the company name with the username if it exists in localStorage
+    if (savedName) {
+        document.getElementById('company-name').textContent = savedName;
+    }
+</script>
+    <!-- Cards Section -->
+    <div class="cards">
+      <div class="balance-card">
+        E-WALLET: AVAILABLE TOTAL ACCUMULATED INCOME
+        <br/><h1>P2,000,000.00</h1>
+      </div>
+
+      <div class="card small-card">
+        TOTAL AVAILABLE BONUS
+        <br/><h3>P10,980.00</h3>
+      </div>
+
+      <div class="card small-card">
+        CREDIT LINE AVAILABLE
+        <br/><h3>P2,000,000.00</h3>
+      </div>
+
+      <div class="card small-card">
+        DIRECT BONUS: AVAILABLE
+        <br/><h3>P1,000.00</h3>
+        <p>Total Direct Bonus Income:<h5>P150,000.00</h5></p>
+      </div>
+
+      <div class="card small-card">
+        INDIRECT BONUS: AVAILABLE
+        <br/><h3>P5,000.00</h3>
+        <p>Total Indirect Bonus:<h5>P250,000.00</h5></p>
+      </div>
+
+      <div class="card small-card">
+        MONTHLY BONUS AVAILABLE
+        <br/><h3>P5,000.00</h3>
+        <p>Total Monthly Bonus:<h5>P1,500,000.00</h5></p>
+      </div>
+
+      <div class="card small-card">
+        MERCHANT REBATES: AVAILABLE
+        <br/><h3>P5,000.00</h3>
+        <p>Total Merchant Rebates:<h5>P5,000.00</h5></p>
+      </div>
+
+      <div class="card">
+        GENERATION SUMMARY
+        <ul>
+          <li>1st Gen 6</li>
+          <li>2nd Gen 25</li>
+          <li>3rd Gen 125</li>
+          <li>4th Gen 625</li>
+          <li>5th Gen 3,125</li>
+          <li>6th Gen 15,625</li>
+          <li>7th Gen 78,125</li>
+          <li>8th Gen 390,625</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        RANKING SUMMARY
+        <ul>
+          <li>1st Gen: 2 1 1 1 1</li>
+          <li>2nd Gen: 20 2 1 1 1</li>
+          <li>3rd Gen: 50 25 25 25</li>
+          <li>4th Gen: 10 10</li>
+          <li>5th Gen: 5 10</li>
+          <li>6th Gen: 10</li>
+          <li>7th Gen: 5 10</li>
+          <li>8th Gen: 5 10</li>
+          <h5>TOTAL: 100</h5>
+        </ul>
+      </div>
+
+      <div class="card">
+        AUTO GENERATION SUMMARY
+        <ul>
+          <li>1st Gen</li>
+          <li>2nd Gen 4</li>
+          <li>3rd Gen 5</li>
+          <li>4th Gen 10</li>
+          <li>5th Gen 200</li>
+          <li>6th Gen 300</li>
+          <li>7th Gen 550</li>
+          <li>8th Gen 780</li>
+          <li>9th Gen 980</li>
+          <li>10th Gen 1,500</li>
+          <li>11th Gen 4,000</li>
+          <li>12th Gen 5,200</li>
+          <li>13th Gen 8,000</li>
+          <li>14th Gen 10,000</li>
+          <li>15th Gen 15,500</li>
+        </ul>
+      </div>
+
+      <div class="card list-card">
+        OVERALL MEMBERS PER REGION
+        <ul>
+          <li>Region I - Ilocos Region = 100</li>
+          <li>Region II - Cagayan Valley = 200</li>
+          <li>Region III - Central Luzon = 500</li>
+          <li>Region IV-A - CALABARZON = 1000</li>
+          <li>Region IV-B - MIMAROPA = 250</li>
+          <li>Region V - Bicol Region = 150</li>
+          <li>Region VI - Western Visayas = 300</li>
+          <li>Region VII - Central Visayas = 450</li>
+          <li>Region VIII - Eastern Visayas = 600</li>
+          <li>Region IX - Zamboanga Peninsula = 700</li>
+          <li>Region X - Northern Mindanao = 800</li>
+          <li>Region XI - Davao Region = 900</li>
+          <li>Region XII - SOCCSKSARGEN = 1000</li>
+          <li>Region XIII - Caraga = 1100</li>
+          <li>National Capital Region (NCR) = 5000</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h4>EXPECTED PAYOUT</h4>
+        <p>Monthly Payout = <strong>P100,000.00</strong></p>
+        <p>Yearly Payout = <strong>P1,200,000.00</strong></p>
+        <h5>Projected Growth:</h5>
+        <p>By end of year = <strong>P1,500,000.00</strong></p>
+      </div>
+
+      <div class="card">
+        <h4>REMARKS</h4>
+        <p>All earnings shown above are based on current performance. The amounts listed are subject to change based on future performance and member activity.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History and Withdrawal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .transaction-history, .withdrawal-form {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .transaction-table, .withdrawal-history-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .transaction-table th, .withdrawal-history-table th, .transaction-table td, .withdrawal-history-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .transaction-table th, .withdrawal-history-table th {
+      background-color: #ff7043;
+      color: white;
+    }
+
+    .available-balance {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .genealogy {
+      background-color: #ff7043;
+      color: white;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .genealogy p {
+      margin: 5px 0;
+    }
+
+    .withdrawal-history-table td.processing {
+      color: #ff7043;
+    }
+
+    .withdrawal-history-table td.approved {
+      color: green;
+    }
+
+    .referral-card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #333;
+      margin: 20px auto;
+    }
+
+    .referral-card h2 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .referral-card p {
+      color: #666;
+      margin: 10px 0;
+    }
+
+    .referral-code-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f8ff;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 15px 0;
+    }
+
+    #referral-code {
+      font-weight: bold;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+
+    .copy-btn {
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .copy-btn:hover {
+      background-color: #0077cc;
+    }
+
+    .note {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .genealogy-container {
+      text-align: center;
+      margin: 50px auto;
+    }
+
+    .genealogy-tree {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-user, .referral, .sub-referral {
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid #ccc;
+    }
+
+    .user-name {
+      margin-top: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .first-level-referrals {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .sub-referrals {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .genealogy-tree .main-user::after,
+    .genealogy-tree .first-level-referrals::before,
+    .genealogy-tree .sub-referrals::before {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background-color: #ccc;
+    }
+
+    .genealogy-tree .main-user::after {
+      top: 100%;
+      left: 50%;
+      height: 20px;
+    }
+
+    .genealogy-tree .first-level-referrals::before {
+      top: -20px;
+      left: 30%;
+      right: 30%;
+      border-top: 2px solid #ccc;
+      width: 70%;
+      height: 1px;
+    }
+
+    .genealogy-tree .first-level-referrals .referral::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      top: 100%;
+      left: 50%;
+      background-color: #ccc;
+    }
+
+    .sub-referrals::before {
+      top: -20px;
+      left: 15%;
+      right: 15%;
+      border-top: 2px solid #ccc;
+      width: 70%;
+    }
+
+    .sub-referral::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      top: -20px;
+      left: 50%;
+      background-color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .profile-img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .user-name {
+        font-size: 12px;
+      }
+    }
+
+    .withdrawal-form input,
+    .withdrawal-form select,
+    .withdrawal-form button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .withdrawal-form button {
+      background-color: #ff5722;
+      color: white;
+      cursor: pointer;
+    }
+
+    .withdrawal-form button:hover {
+      background-color: #ff7043;
+    }
+
+    #center-dropdown-new,
+    #bank-details-new,
+    #ewallet-details-new {
+      display: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .close-btn {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: black;
+    }
+
+    .modal button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    .modal button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="referral-card">
+      <h2>Refer a Friend</h2>
+      <p>Share your referral code and earn rewards!</p>
+      <div class="referral-code-container">
+        <span id="referral-code">REF12345</span>
+        <button class="copy-btn" onclick="copyReferralCode()">Copy</button>
+      </div>
+      <p class="note">Invite friends using your code and receive special offers.</p>
+    </div>
+
+    <h2 style="text-align: center; color: #ff7043;">REGISTER LIST PER WEEK</h2>
+    <table border="1" style="width: 100%; border-color: white; border-collapse: collapse; font-weight: bold; color: white;">
+      <tr style="background-color: #ff7043; color: black;">
+        <th>Name</th>
+        <th>Date</th>
+        <th>Account Status</th>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Adam Joe</td>
+        <td>Jan-10-2024</td>
+        <td>Activated</td>
+      </tr>
+      <tr style="background-color: white; color:black;">
+        <td>Mamm Adee</td>
+        <td>Jan-12-2024</td>
+        <td>Activated</td>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Adem Melj</td>
+        <td>May-24-2024</td>
+        <td>Not Activated</td>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Awwal Malik</td>
+        <td>July-15-2024</td>
+        <td>Activated</td>
+      </tr>
+    </table>
+
+    <div class="genealogy-container">
+      <h2>GENEALOGY</h2>
+      <div class="genealogy-tree">
+        <div class="main-user">
+          <img src="https://i.postimg.cc/DfPYyr12/LIVEWELL-Marketing-Corp-LOGO-only-removebg-preview.png" alt=" " class="profile-img">
+          <div class="user-name"> </div>
+        </div>
+
+        <div class="first-level-referrals">
+          <div class="referral">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnbKQ7yvraloHZWvkxO19bayyFfF_Os84qGw&usqp=CAU" alt="  " class="profile-img">
+            <div class="user-name">  </div>
+            <div class="sub-referrals">
+              <div class="sub-referral">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaAHa7Ojw6FnyVGD385_d9Qd0FaNHfcw3eCg&usqp=CAU" alt="  " class="profile-img">
+                <div class="user-name">  </div>
+              </div>
+              <div class="sub-referral">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMwTLxrBeGx82w7QE3FQgt7aK3IYZNsL8Bnw&usqp=CAU" alt="  " class="profile-img">
+                <div class="user-name">  </div>
+              </div>
+              <div class="sub-referral">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4JBYpm-tXcrFQulfvQw2YEJpnXQX4EajLjA&usqp=CAU" alt="  " class="profile-img">
+                <div class="user-name">  </div>
+              </div>
+            </div>
+          </div>
+          <div class="referral">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRarJc-qvMmotvcTHJmi0heCCo6R3D88iInXA&usqp=CAU" alt="  " class="profile-img">
+            <div class="user-name">  </div>
+          </div>
+          <div class="referral">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSolRKPe8MBBjPvb5j8aLsbk3fAhE3c9nKHEw&s" alt="  " class="profile-img">
+            <div class="user-name">  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 style="text-align: center; color: #ff7043;">LIST OF PERFORMANCE MONTHLY (OVER ALL MEMBERS)</h2>
+    <table border="1" style="width: 100%; border-collapse: collapse; border-color: white; font-weight: bold; color: white;">
+      <tr style="background-color: #ff7043; color: white;">
+        <th>Name</th>
+        <th>Rank</th>
+        <th>Date</th>
+        <th>Reward</th>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Mike Joe</td>
+        <td>1st</td>
+        <td>Jan-10-2024</td>
+        <td>P10000</td>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Ada Bolo</td>
+        <td>2nd</td>
+        <td>Jan-10-2024</td>
+        <td>P3000</td>
+      </tr>
+      <tr style="background-color: white; color: black;">
+        <td>Samuel Joe</td>
+        <td>3rd</td>
+        <td>Jan-10-2024</td>
+        <td>P20010</td>
+      </tr>
+    </table>
+
+    <h2>Transaction History</h2>
+    <div class="transaction-history">
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Sales Invoice No</th>
+            <th>Item</th>
+            <th>Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2024-10-15</td>
+            <td>John Doe</td>
+            <td>INV-1234</td>
+            <td>Product A</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>2024-10-14</td>
+            <td>Jane Smith</td>
+            <td>INV-1235</td>
+            <td>Product B</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Unilevel Monthly Income</h2>
+    <div class="genealogy">
+      <p>You: P250 Personal P(Current Month) (1pt = P1.00)</p>
+      <p>1st Level: 150PPV</p>
+      <p>2nd Level: 175PPV</p>
+      <p>3rd Level: 250PPV</p>
+      <p>4th Level: 290PPV</p>
+      <p>5th Level: 330PPV</p>
+      <p>6th Level: 290PPV</p>
+      <p>7th Level: 22PPV</p>
+      <p>8th Level: 210PPV</p>
+    </div>
+
+    <h2>Withdrawal Form</h2>
+    <div class="withdrawal-form">
+      <div class="available-balance">
+        <strong>Available Balance:</strong> P2,500.00
+      </div>
+    
+      <label for="withdrawal-amount-new">Payout Amount</label>
+      <input type="number" id="withdrawal-amount-new" placeholder="Enter withdrawal amount">
+    
+      <label for="payment-method-new">Payment Method</label>
+      <select id="payment-method-new" onchange="togglePaymentOptionsNew()">
+        <option value="check">Check</option>
+        <option value="ewallet">E-wallet</option>
+        <option value="bank">Bank</option>
+      </select>
+    
+      <div id="center-dropdown-new">
+        <label for="send-to-center-new">Send to Center</label>
+        <select id="send-to-center-new">
+          <option value="1234">Account ID No. 1234 - GENSAN</option>
+          <option value="1235">Account ID No. 1235 - DAVAO</option>
+        </select>
+      </div>
+    
+      <!-- Bank Details Section -->
+      <div id="bank-details-new">
+        <label for="bank-name-new">Bank Name</label>
+        <select id="bank-name-new">
+          <option value="bpi">BPI (Bank of the Philippine Islands)</option>
+        </select>
+        
+        <label for="bank-account-name-new">Account Name</label>
+        <input type="text" id="bank-account-name-new" placeholder="Enter account name">
+    
+        <label for="bank-account-number-new">Account Number</label>
+        <input type="text" id="bank-account-number-new" placeholder="Enter account number">
+      </div>
+    
+      <!-- E-wallet Details Section -->
+      <div id="ewallet-details-new">
+        <label for="ewallet-name-new">E-wallet Name</label>
+        <select id="ewallet-name-new">
+          <option value="gcash">GCash</option>
+          <option value="paymaya">PayMaya</option>
+          <option value="gotyme">GoTyme</option>
+        </select>
+        
+        <label for="ewallet-account-name-new">Account Name</label>
+        <input type="text" id="ewallet-account-name-new" placeholder="Enter account name">
+    
+        <label for="ewallet-account-number-new">Account Number</label>
+        <input type="text" id="ewallet-account-number-new" placeholder="Enter account number">
+      </div>
+    
+      <button id="submit-withdrawal-new" onclick="submitWithdrawalNew()">Submit Withdrawal</button>
+    </div>
+    
+    <!-- Modal for confirmation -->
+    <div id="confirmation-modal-new" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModalNew()">×</span>
+        <h2>Confirm Your Withdrawal</h2>
+        <p id="modal-message-new"></p>
+        <button onclick="confirmSubmissionNew()">Confirm</button>
+      </div>
+    </div>
+    
+    <script>
+      // Function to toggle payment options
+      function togglePaymentOptionsNew() {
+        const paymentMethodNew = document.getElementById('payment-method-new').value;
+        const centerDropdownNew = document.getElementById('center-dropdown-new');
+        const bankDetailsNew = document.getElementById('bank-details-new');
+        const ewalletDetailsNew = document.getElementById('ewallet-details-new');
+    
+        // Show/Hide based on payment method
+        centerDropdownNew.style.display = paymentMethodNew === 'check' ? 'block' : 'none';
+        bankDetailsNew.style.display = paymentMethodNew === 'bank' ? 'block' : 'none';
+        ewalletDetailsNew.style.display = paymentMethodNew === 'ewallet' ? 'block' : 'none';
+      }
+    
+      // Function to submit the withdrawal
+      function submitWithdrawalNew() {
+        const amountNew = document.getElementById('withdrawal-amount-new').value;
+        const paymentMethodNew = document.getElementById('payment-method-new').value;
+    
+        if (amountNew === '' || amountNew <= 0) {
+          alert('Please enter a valid amount.');
+          return;
+        }
+    
+        let messageNew = `Amount: ${amountNew}\nPayment Method: ${paymentMethodNew}`;
+    
+        if (paymentMethodNew === 'check') {
+          const centerNew = document.getElementById('send-to-center-new').value;
+          messageNew += `\nCenter: ${centerNew}`;
+        } else if (paymentMethodNew === 'bank') {
+          const bankNameNew = document.getElementById('bank-name-new').value;
+          const bankAccountNameNew = document.getElementById('bank-account-name-new').value;
+          const bankAccountNumberNew = document.getElementById('bank-account-number-new').value;
+          messageNew += `\nBank: ${bankNameNew}\nAccount Name: ${bankAccountNameNew}\nAccount Number: ${bankAccountNumberNew}`;
+        } else if (paymentMethodNew === 'ewallet') {
+          const ewalletNameNew = document.getElementById('ewallet-name-new').value;
+          const ewalletAccountNameNew = document.getElementById('ewallet-account-name-new').value;
+          const ewalletAccountNumberNew = document.getElementById('ewallet-account-number-new').value;
+          messageNew += `\nE-wallet: ${ewalletNameNew}\nAccount Name: ${ewalletAccountNameNew}\nAccount Number: ${ewalletAccountNumberNew}`;
+        }
+    
+        // Show the confirmation modal with the message
+        document.getElementById('modal-message-new').innerText = messageNew;
+        document.getElementById('confirmation-modal-new').style.display = 'block';
+      }
+    
+      // Function to close the modal
+      function closeModalNew() {
+        document.getElementById('confirmation-modal-new').style.display = 'none';
+      }
+    
+      // Function to confirm the withdrawal submission
+      function confirmSubmissionNew() {
+        closeModalNew();
+        alert('Withdrawal request confirmed!');
+        // You can add further logic for form submission or API call here
+      }
+    
+      // Hide the modal on load
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('confirmation-modal-new').style.display = 'none';
+        togglePaymentOptionsNew(); // Ensure the correct fields are shown based on the initial selection
+      });
+    </script>
+    
+    <style>
+      .withdrawal-form input,
+      .withdrawal-form select,
+      .withdrawal-form button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    
+      .withdrawal-form button {
+        background-color: #ff7043;
+        color: white;
+        cursor: pointer;
+      }
+    
+      .withdrawal-form button:hover {
+        background-color: gold;
+      }
+    
+      #center-dropdown-new,
+      #bank-details-new,
+      #ewallet-details-new {
+        display: none; /* Initially hide sections */
+      }
+    
+      /* Modal styles */
+      .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.4); 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+    
+      .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    
+      .close-btn:hover,
+      .close-btn:focus {
+        color: black;
+      }
+    
+      .modal button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        border-radius: 5px;
+      }
+    
+      .modal button:hover {
+        background-color: #218838;
+      }
+    </style>
+    
+      <h2>Withdrawal History</h2>
+      <div class="withdrawal-history">
+        <table class="withdrawal-history-table">
+          <thead>
+            <tr>
+              <th>Trans No.</th>
+              <th>Date Request</th>
+              <th>Date Released</th>
+              <th>Amount Request</th>
+              <th>10% Admin Fee</th>
+              <th>Pay Out Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>2024-10-10</td>
+              <td>2024-10-15</td>
+              <td>P1,000.00</td>
+              <td>P100.00</td>
+              <td class="approved">Approved</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>2024-10-11</td>
+              <td>-</td>
+              <td>P1,500.00</td>
+              <td>P150.00</td>
+              <td class="processing">Processing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    
+    </body>
+    </html>da

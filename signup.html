@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Phone OTP Verification</title>
+    <style>
+        body {
+            font-family: "Roboto", Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h2 {
+            text-align: center;
+            color: #ee4d2d;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ee4d2d;
+            color: #fff;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        button:hover {
+            background-color: #ff7337;
+        }
+        #otp-section {
+            display: none;
+            width: 100%;
+        }
+        #recaptcha-container {
+            margin: 10px 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 300px;
+        }
+        .close {
+            color: #aaa;
+            font-size: 20px;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <div id="signup-section">
+        <span>Select Profile Image</span>
+        <input type="file" id="profile-picture" accept="image/*" title="Upload Profile Picture" onclick="this.value=null;">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="checkbox" id="showPassword" style="margin-top: 10px;"> <span style="font-size: 12px;">Show</span>
+        <input type="text" id="sponsor" placeholder="Referral Code (Optional)">
+        <br />
+        <div style="display: flex; width: 100%;">
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <button id="get-otp" style="flex: 0.3; margin-left: 10px;">Get OTP</button>
+        </div>
+        <div id="otp-section">
+            <input type="number" id="otp" placeholder="Enter OTP" required>
+            <button class="copy-btn" id="copy-otp">Copy OTP</button>
+        </div>
+        <div id="recaptcha-container"></div>
+        <button id="verify-otp">Register</button>
+    </div>
+</div>
+
+<div id="notification-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-modal">×</span>
+        <p id="modal-message"></p>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyD-6zZlaLEx0YtTOQ8rFyebPf8DCw8mkq0",
+        authDomain: "appcreator24-25638.firebaseapp.com",
+        projectId: "appcreator24-25638",
+        storageBucket: "appcreator24-25638.appspot.com",
+        messagingSenderId: "230297127510",
+        appId: "1:230297127510:web:1d27039a1bdabfc58e49f7",
+        measurementId: "G-6CMD6L8K7S"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    const phoneInput = document.getElementById('phone');
+    const getOtpButton = document.getElementById('get-otp');
+    const otpInput = document.getElementById('otp');
+    const verifyOtpButton = document.getElementById('verify-otp');
+    const otpSection = document.getElementById('otp-section');
+    const modal = document.getElementById('notification-modal');
+    const modalMessage = document.getElementById('modal-message');
+    const closeModal = document.getElementById('close-modal');
+    const copyOtpButton = document.getElementById('copy-otp');
+    const passwordInput = document.getElementById('password');
+
+    let generatedOtp;
+    let phoneNumber;
+
+    function showModal(message) {
+        modalMessage.textContent = message;
+        modal.style.display = 'flex';
+    }
+
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    copyOtpButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(generatedOtp);
+        showModal('OTP copied to clipboard!');
+    });
+
+    function generateOtp() {
+        return Math.floor(100000 + Math.random() * 900000);
+    }
+
+    getOtpButton.addEventListener('click', () => {
+        phoneNumber = phoneInput.value;
+
+        if (!phoneNumber) {
+            showModal('Please enter your phone number');
+            return;
+        }
+
+        generatedOtp = generateOtp();
+        showModal('Your OTP is: ' + generatedOtp);
+        otpSection.style.display = 'block';
+    });
+
+    verifyOtpButton.addEventListener('click', () => {
+        const enteredOtp = otpInput.value;
+
+        if (parseInt(enteredOtp) !== generatedOtp) {
+            showModal('Invalid OTP. Please try again.');
+            return;
+        }
+
+        const username = document.getElementById('username').value;
+        const sponsor = document.getElementById('sponsor').value;
+        const email = document.getElementById('email').value;
+        const password = passwordInput.value;
+
+        if (!username || !email || !password) {
+            showModal('Please enter all required fields.');
+            return;
+        }
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+
+                const newUserRef = database.ref('users').child(user.uid);
+                newUserRef.set({
+                    username: username,
+                    phone: phoneNumber,
+                    sponsor: sponsor || 'N/A',
+                    email: email,
+                    createdAt: new Date().toISOString()
+                });
+
+                // Save username to localStorage
+                localStorage.setItem('username', username);
+
+                showModal('Registration successful! Welcome to the app.');
+                otpSection.style.display = 'none';
+                window.location.href = 'dashboard.html';
+            })
+            .catch((error) => {
+                showModal('Error: ' + error.message);
+            });
+    });
+
+    document.getElementById('showPassword').addEventListener('change', function () {
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+</script>
+</body>
+</html>
